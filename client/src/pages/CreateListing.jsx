@@ -31,7 +31,7 @@ export default function CreateListing() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log(formData);
+  // console.log(formData);
 
   const handleImageSubmit = (e) => {
     e.preventDefault();
