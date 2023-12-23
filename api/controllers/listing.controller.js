@@ -89,7 +89,7 @@ export const getListings = async (req, res, next) => {
 
     let type = req.query.type;
 
-    if(type === undefined || type === 'false'){
+    if(type === undefined || type === 'all'){
       type = {$in: ['sale', 'rent']}
     }
 
@@ -99,7 +99,7 @@ export const getListings = async (req, res, next) => {
 
     const order = req.query.order || 'desc';
 
-    const listing = await Listing.find({
+    const listings = await Listing.find({
       name : {$regex : searchTerm, $options: 'i'},
       offer,
       furnished,
@@ -109,6 +109,7 @@ export const getListings = async (req, res, next) => {
       {[sort]: order}
     ).limit(limit).skip(startIndex);
  
+    return res.status(200).json(listings);
   } catch (error) {
     next(error);
   }
